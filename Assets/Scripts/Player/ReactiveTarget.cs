@@ -4,17 +4,6 @@ using UnityEngine;
 
 public class ReactiveTarget : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void ReactToHit(float damage)
     {
         Debug.Log("Popal na " + damage);

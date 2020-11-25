@@ -5,15 +5,14 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-    private float speed = 50f;
+    private float _speed = 50f;
     public float damage = 30f;
     [SerializeField] private GameObject _explosion;
     private GameObject _explosioned;
 
     void Update()
     {
-        transform.Translate(Vector3.forward * speed * Time.deltaTime);
-        
+        transform.Translate(Vector3.forward * _speed * Time.deltaTime);  
     }
     private void OnCollisionEnter(Collision collision)
     {

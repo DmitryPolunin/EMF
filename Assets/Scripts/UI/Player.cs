@@ -5,43 +5,43 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    private int health = 100;
-    private int maxHealth = 100;
-    private int healthRecSpeed = 0;
+    private int _health = 100;
+    private int _maxHealth = 100;
+    private int _healthRecSpeed = 0;
     private int _mana = 0;
+    private int _maxMana = 100;
+    private int _manaRecSpeed = 3;
     public int mana 
     {
         get { return _mana; }
     }
-    private int maxMana = 100;
-    private int manaRecSpeed = 3;
     
-    private HealthBar healthBar;
-    private ManaBar manaBar;
+    private HealthBar _healthBar;
+    private ManaBar _manaBar;
 
     
     void Start()
     {
-        healthBar = GetComponentInChildren<HealthBar>();
-        manaBar = GetComponentInChildren<ManaBar>();
+        _healthBar = GetComponentInChildren<HealthBar>();
+        _manaBar = GetComponentInChildren<ManaBar>();
 
-        if (manaRecSpeed != 0) StartCoroutine(ManaRecovery());
-        if (healthRecSpeed != 0) StartCoroutine(HealthRecovery());
+        if (_manaRecSpeed != 0) StartCoroutine(ManaRecovery());
+        if (_healthRecSpeed != 0) StartCoroutine(HealthRecovery());
     }
     public IEnumerator ManaRecovery()
     {
-            while (_mana < maxMana)
+            while (_mana < _maxMana)
             {
-                _mana += manaRecSpeed;
+                _mana += _manaRecSpeed;
                 ChangeMana();
                 yield return new WaitForSeconds(0.5f);
             }
     }
     public IEnumerator HealthRecovery()
     {
-            while (health < maxHealth)
+            while (_health < _maxHealth)
             {
-                health += healthRecSpeed;
+                _health += _healthRecSpeed;
                 ChangeHealth();
                 yield return new WaitForSeconds(0.5f);
             }
@@ -49,12 +49,12 @@ public class Player : MonoBehaviour
 
     public void ChangeHealth()
     {
-        healthBar.SetHealth(health);
+        _healthBar.SetHealth(_health);
     }
 
     public void ChangeMana()
     {
-        manaBar.SetMana(mana);
+        _manaBar.SetMana(mana);
     }
 
     public void ShootedFireball()
@@ -74,8 +74,8 @@ public class Player : MonoBehaviour
 
     public IEnumerator BlueBuff()
     {
-        manaRecSpeed += 3;
+        _manaRecSpeed += 3;
         yield return new WaitForSeconds(60);
-        manaRecSpeed -= 3;
+        _manaRecSpeed -= 3;
     }
 }

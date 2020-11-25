@@ -5,20 +5,20 @@ using UnityEngine.UI;
 
 public class CardsLogic : MonoBehaviour
 {
-    [SerializeField] private Image[] Cards = new Image[3];
-    [SerializeField] private Player player;
+    [SerializeField] private Image[] _Cards = new Image[3];
+    [SerializeField] private Player _player;
 
 
     private void Update()
     {
-        if (player.mana >= 15) SetActive(Cards[0]);
-        else SetInactive(Cards[0]);
+        if (_player.mana >= 15) SetActive(_Cards[0]);
+        else SetInactive(_Cards[0]);
 
-        if (player.mana >= 30) SetActive(Cards[1]);
-        else SetInactive(Cards[1]);
+        if (_player.mana >= 30) SetActive(_Cards[1]);
+        else SetInactive(_Cards[1]);
 
-        if (player.mana >= 50) SetActive(Cards[2]);
-        else SetInactive(Cards[2]);
+        if (_player.mana >= 50) SetActive(_Cards[2]);
+        else SetInactive(_Cards[2]);
     }
 
     public void SetActive(Image image)

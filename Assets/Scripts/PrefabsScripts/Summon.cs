@@ -5,10 +5,10 @@ using UnityEngine;
 public class Summon : MonoBehaviour
 {
     private int _lifetime = 40;
-    private float speed = 15f;
+    private float _speed = 15f;
     private float _obstacleRange = 10f;
-    private bool isAttack;
-    private bool isMove;
+    private bool _isAttack;
+    private bool _isMove;
     private Vector3 _enemyPos;
 
     private float _lifes = 2f;
@@ -20,23 +20,23 @@ public class Summon : MonoBehaviour
     {
         _animator = GetComponent<Animator>();
         _animator.SetBool("atack", false);
-        isAttack = false;
-        isMove = true;
+        _isAttack = false;
+        _isMove = true;
         StartCoroutine(lifetime());
     }
     private void Update()
     {
-        if (isMove == true)
+        if (_isMove == true)
         {
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+            transform.Translate(Vector3.forward * _speed * Time.deltaTime);
             _animator.Play("FireSummonIdle");
         }
             Ray ray = new Ray(transform.position, transform.forward);
             RaycastHit hit;
 
-        if (isAttack == false)
+        if (_isAttack == false)
         {
-            isMove = true;
+            _isMove = true;
             if (Physics.SphereCast(ray, 1f, out hit))
             {
                 if (hit.distance < _obstacleRange && hit.transform.tag != "FireSummon")
@@ -46,12 +46,12 @@ public class Summon : MonoBehaviour
                 }
             }
         }
-        if (isAttack == true)
+        if (_isAttack == true)
         {
-            isMove = false;
+            _isMove = false;
             transform.LookAt(_enemyPos);
             if (Vector3.Distance(transform.position, _enemyPos) > 7)
-                transform.position = Vector3.MoveTowards(transform.position, _enemyPos, speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, _enemyPos, _speed * Time.deltaTime);
             else StartCoroutine(Attack());
         }
     }
@@ -65,7 +65,7 @@ public class Summon : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player2" || other.tag == "Player3" || other.tag == "Player4")
-        isAttack = true; 
+        _isAttack = true; 
     }
 
     private void OnTriggerStay(Collider other)
@@ -78,7 +78,7 @@ public class Summon : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         if(other.tag == "Player2" || other.tag == "Player3" || other.tag == "Player4")
-        isAttack = false;
+        _isAttack = false;
     }
 
     public void ReactToHit()

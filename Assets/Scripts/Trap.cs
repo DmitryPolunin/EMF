@@ -20,7 +20,6 @@ public class Trap : MonoBehaviour
 
     public IEnumerator Trapped()
     {
-        Debug.Log("POIMALI TEBYA SOBAKA");
         _victim.isTrapped = true;
         yield return new WaitForSeconds(2f);
         _victim.isTrapped = false;

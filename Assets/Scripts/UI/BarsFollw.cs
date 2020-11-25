@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BarsFollw : MonoBehaviour
 {
-    [SerializeField] private GameObject fireMage;
-    private float offset = 4f;
+    [SerializeField] private GameObject _fireMage;
+    private float _offset = 4f;
 
     private void Update()
     {
-        transform.position = new Vector3(fireMage.transform.position.x, 10f, fireMage.transform.position.z + offset);
+        transform.position = new Vector3(_fireMage.transform.position.x, 10f, _fireMage.transform.position.z + _offset);
     }
 }

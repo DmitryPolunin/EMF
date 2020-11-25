@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    [SerializeField] private Player player = null;
-    [SerializeField] private NoManaText noMana = null;
+    [SerializeField] private Player _player = null;
+    [SerializeField] private NoManaText _noMana = null;
 
-    [SerializeField] private GameObject fireballPrefab = null;
+    [SerializeField] private GameObject _fireballPrefab = null;
     [SerializeField] private GameObject _trapPrefab = null;
     [SerializeField] private GameObject _summonPrefab = null;
     [SerializeField] private Transform _shootDir = null;
@@ -32,40 +32,40 @@ public class Shooting : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.J))
         {
             _shootEndPos.gameObject.SetActive(false);
-            if (player.mana >= 15)
+            if (_player.mana >= 15)
             {
-                _shootedAmmo = Instantiate(fireballPrefab, _shootDir.position, _shootDir.rotation) as GameObject;
-                player.ShootedFireball();
+                _shootedAmmo = Instantiate(_fireballPrefab, _shootDir.position, _shootDir.rotation) as GameObject;
+                _player.ShootedFireball();
             }
             else
             {
-                StartCoroutine(noMana.SetActiveText());
+                StartCoroutine(_noMana.SetActiveText());
             }
         }
         //Place trap
         if (Input.GetKeyUp(KeyCode.K))
         {
-            if (player.mana >= 30)
+            if (_player.mana >= 30)
             {
                 _shootedAmmo = Instantiate(_trapPrefab, transform.position - Vector3.up * 4.5f, transform.rotation) as GameObject;
-                player.PlacedTrap();
+                _player.PlacedTrap();
             }
             else
             {
-                StartCoroutine(noMana.SetActiveText());
+                StartCoroutine(_noMana.SetActiveText());
             }
         }
         //Summon
         if (Input.GetKeyUp(KeyCode.L))
         {
-            if (player.mana >= 50)
+            if (_player.mana >= 50)
             {
                 _shootedAmmo = Instantiate(_summonPrefab, transform.position + Vector3.forward * 10, Quaternion.Euler(0f,transform.rotation.y,0f)) as GameObject;
-                player.Summon();
+                _player.Summon();
             }
             else
             {
-                StartCoroutine(noMana.SetActiveText());
+                StartCoroutine(_noMana.SetActiveText());
             }
         }
     }

@@ -4,48 +4,48 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    private float speed = 20f;
+    private float _speed = 20f;
     private CharacterController _characterController;
-    private float moveX;
-    private float moveY;
-    private Vector3 velocity;
-    private float gravity = -9f;
-    private Vector3 gravityVector;
+    private float _moveX;
+    private float _moveY;
+    private Vector3 _velocity;
+    private float _gravity = -9f;
+    private Vector3 _gravityVector;
 
-    private bool isAiming;
+    private bool _isAiming;
     public bool isTrapped = false;
    
     void Start()
     {
         _characterController = GetComponent<CharacterController>();
-        gravityVector = new Vector3(0, gravity, 0);
-        isAiming = false;
+        _gravityVector = new Vector3(0, _gravity, 0);
+        _isAiming = false;
     }
 
     
     void Update()
     {
-        moveX = Input.GetAxis("Horizontal");
-        moveY = Input.GetAxis("Vertical");
-        velocity = new Vector3(moveX, 0f, moveY).normalized * speed;
+        _moveX = Input.GetAxis("Horizontal");
+        _moveY = Input.GetAxis("Vertical");
+        _velocity = new Vector3(_moveX, 0f, _moveY).normalized * _speed;
 
         if (!isTrapped)
         {
-            _characterController.Move(velocity * Time.deltaTime + gravityVector);
+            _characterController.Move(_velocity * Time.deltaTime + _gravityVector);
         }
 
         if (Input.GetKeyDown(KeyCode.J))
         {
-            isAiming = true;
+            _isAiming = true;
         }
         else if (Input.GetKeyUp(KeyCode.J))
         {
-            isAiming = false;
+            _isAiming = false;
         }
             
-        if (velocity.magnitude > 0.1f && !isAiming)
+        if (_velocity.magnitude > 0.1f && !_isAiming)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(velocity), Time.deltaTime * 700);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(_velocity), Time.deltaTime * 700);
         }
     }
 }
